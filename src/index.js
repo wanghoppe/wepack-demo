@@ -16,3 +16,4 @@ import printMe from './print.js';
  }
 
  document.body.appendChild(component());
+ import('./53.js').then((data) => {console.log(`dynamically import ${data.dynamic}`)})
