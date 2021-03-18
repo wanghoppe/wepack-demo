@@ -1,16 +1,18 @@
 const MODULE = {
   'a.js': (module, myImport) => {
 
+    const target = {
+      'default': () => aPrint,
+      'aString': () => aString
+    }
+    module.exports = new Proxy(
+      target, {
+        get(target, prop) {
+          return target[prop]()
+        }
+      }
+    )
 
-    module.exports = new Proxy({}, {
-      get(_, prop, )
-    })
-    // const target = {
-    //   'aPrint': () => aPrint,
-    //   'aString': () => aString
-    // }
-    module.exports.default = aPrint;
-    module.exports.aString = aString;
     const B_MODULE = myImport('b.js')
 
     B_MODULE.default('a')
@@ -21,7 +23,14 @@ const MODULE = {
     var aString = 'aString';
   },
   'b.js': (module, myImport) => {
-    module.exports.default = bPrint;
+    module.exports = new Proxy(
+      {
+        default: () => bPrint
+      },
+      {get(target, prop) {
+        return target[prop]()
+      }}
+    );
     const A_MODULE = myImport('a.js')
 
     A_MODULE.default('b')
