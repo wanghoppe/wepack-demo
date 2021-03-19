@@ -6,4 +6,4 @@ export default function aPrint(caller) {
   console.log(`aPrint from ${caller}`);
 }
 
-// export const aString = 'aString';
+export const aString = 'aString';
